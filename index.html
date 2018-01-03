@@ -6,11 +6,13 @@
 		<link rel="stylesheet" href="pagination.css" />
 	</head>
 	<body>
-		<div id="test"></div>
+		<div class="pagination" id="test"></div>
 		<script src="pagination.js"></script>
 		<script>
 			var pagination = new Pagination({
-				elem: '#test'
+				elem: '#test',
+				curr: 7,
+				total: 10
 			});
 		</script>
 	</body>
