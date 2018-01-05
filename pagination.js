@@ -52,28 +52,63 @@
 		renderPage: function(){
 			var total = this.options.total,
 				curr = this.options.curr,
-				html = '';
+				html = '',
+				pageHead = '',
+				pageEnd = '',
+				i = 1,
+				j = 1;
 			
-			for(var i = 1; curr-i > 0; i++){
-				html = '<a href="javascript:;">'+ (curr-i) +'</a>' + html;
-				if(curr > 4 && i > 1 && total-(curr-i) > 3){
+			pageHead =  '<a class="prev'+ (curr == 1 ? ' disabled' : '') +'" href="javascript:;">上一页</a>'+
+						(curr != 1 ? '<a class="btn" href="javascript:;">1</a>' : '')+
+						(curr > 4 && total > 6 ? '<a href="javascript:;">...</a>' : '');
+			
+			pageEnd  =  ((total > 6 && total-curr > 3) || (total-curr >= 3 && total == 7) ? '<a href="javascript:;">...</a>' : '')+
+						(total != curr ? ('<a class="btn" href="javascript:;">'+ total +'</a>') : '')+
+						'<a class="next'+ (curr == total ? ' disabled' : '') +'" href="javascript:;">下一页</a>';
+						
+			
+			while(i < 5){
+				if(curr-i < 2 || (4 < curr && curr < total-1 && i > 2) || (curr == total-1 && i > 3)){
 					break;
 				}
+				html = '<a class="btn" href="javascript:;">'+ (curr-i) +'</a>' + html;
+				i++;
 			}
 			
 			html += '<a class="active" href="javascript:;">'+ curr +'</a>';
 			
-			for(var j = 1; curr+j <= total; j++){
-				html += '<a href="javascript:;">'+ (curr+j) +'</a>';
-				if((total - curr > 3 && j > 1 && curr > 3) || i+j > 4){
+			while(j < 5){
+				if(curr+j >= total || (curr > 4 && j > 2) || (curr+j > 5 && curr < 5 )){
 					break;
 				}
+				html += '<a class="btn" href="javascript:;">'+ (curr+j) +'</a>';
+				j++;
 			}
 			
-			this.elem.innerHTML = '<a href="javascript:;">上一页</a>' + html + '<a href="javascript:;">下一页</a>';
+			this.elem.innerHTML =  pageHead + html + pageEnd;
+			this.bindEvent();
 		},
 		bindEvent: function(){
+			var _this = this,
+				prev = _this.elem.querySelector('.prev'),
+				next = _this.elem.querySelector('.next');
+				
+			_this.elem.querySelectorAll('.btn').forEach(function(item, index){
+				item.addEventListener('click', function(){
+					_this.options.curr = Number(item.textContent);
+					_this.renderPage();
+				});
+			});
 			
+			(prev.getAttribute('class').indexOf('disabled') === -1) && prev.addEventListener('click', function(){
+				_this.options.curr--;
+				_this.renderPage();
+			});
+			
+			(next.getAttribute('class').indexOf('disabled') === -1) && next.addEventListener('click', function(){
+				_this.options.curr++;
+				_this.renderPage();
+			});
 		},
 		extend: function(opt1, opt2){
 			for(var k in opt2){
