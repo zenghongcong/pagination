@@ -2,7 +2,7 @@
 ---
 原生js分页组件
 ---
-# 兼容性
+## 兼容性
 ie9,ie9+,chrome,firefox,safari
 ---
 ## 使用
