@@ -10,6 +10,6 @@ IE9+
 var pagination = new Pagination(option);
 </script>
 ## option
-elem   <string>     初始化容器             e.g '#test'
-curr   <number>     当前页                 e.g 1
-total  <number>    总页数                  e.g 7
+elem   <string>     初始化容器             e.g '#test'    
+curr   <number>     当前页                 e.g 1    
+total  <number>    总页数                  e.g 7    
