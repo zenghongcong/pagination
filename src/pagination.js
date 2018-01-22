@@ -92,8 +92,8 @@
 			var _this = this,
 				prev = _this.elem.querySelector('.prev'),
 				next = _this.elem.querySelector('.next');
-				
-			_this.elem.querySelectorAll('.btn').forEach(function(item, index){
+			
+			Array.prototype.forEach.call(_this.elem.querySelectorAll('.btn'),function(item, index){
 				item.addEventListener('click', function(){
 					_this.options.curr = Number(item.textContent);
 					_this.renderPage();

@@ -1,15 +1,23 @@
-# pagination.js
+# pagination
+---
 原生js分页组件
+---
 # 兼容性
-IE9+
-# 使用
-<link rel="stylesheet" href="src/pagination.css" />
-<div class="pagination" id="test"></div>
-<script src="src/pagination.js"></script>
-<script>
-var pagination = new Pagination(option);
-</script>
-## option
-elem   <string>     初始化容器             e.g '#test'    
-curr   <number>     当前页                 e.g 1    
-total  <number>    总页数                  e.g 7    
+ie9,ie9+,chrome,firefox,safari
+---
+## 使用
+
+```js
+var pagination = new Pagination({
+		elem: '#test',
+		curr: 1,
+		total: 7
+	});
+```
+## 参数
+
+| Parameter       | Description     | Type     | Default      |
+|-----------------|-----------------|----------|--------------|
+| elem   		  | 容器元素         	    | String   | none         |
+| curr   		  | 当前页                     | Number   | 1            |
+| total  		  | 总页数                     | Number   | 1            |
